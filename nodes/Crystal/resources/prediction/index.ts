@@ -85,16 +85,17 @@ export const predictionFields: INodeProperties[] = [
 		name: 'pollInterval',
 		type: 'number',
 		typeOptions: { minValue: 1 },
-		default: 3,
+		default: 5,
 		displayOptions: { show: showForCreateAndWait },
-		description: 'How long to wait between poll attempts. Jobs typically finish within tens of seconds.',
+		description:
+			'How long to wait between poll attempts. Jobs usually finish within a minute or two, but can take longer when Crystal’s queue is busy.',
 	},
 	{
 		displayName: 'Timeout (Seconds)',
 		name: 'timeout',
 		type: 'number',
 		typeOptions: { minValue: 1 },
-		default: 120,
+		default: 300,
 		displayOptions: { show: showForCreateAndWait },
 		description:
 			'Give up waiting after this many seconds. The job keeps running on Crystal’s side — retrieve it later with "Get".',

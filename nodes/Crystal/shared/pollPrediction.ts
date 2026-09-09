@@ -40,8 +40,8 @@ export async function pollPrediction(
 	}
 
 	const pollIntervalMs =
-		Math.max(1, this.getNodeParameter('pollInterval', 3) as number) * 1000;
-	const timeoutMs = Math.max(1, this.getNodeParameter('timeout', 120) as number) * 1000;
+		Math.max(1, this.getNodeParameter('pollInterval', 5) as number) * 1000;
+	const timeoutMs = Math.max(1, this.getNodeParameter('timeout', 300) as number) * 1000;
 	const deadline = Date.now() + timeoutMs;
 
 	let job: IDataObject = { ...submission };

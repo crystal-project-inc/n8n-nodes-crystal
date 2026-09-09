@@ -76,7 +76,7 @@ API credits are a single pool per organization. See the [API reference](https://
 - **Draft on-brand outreach.** **Content: Generate Prompt** with the profile ID and an objective, then feed the returned `prompt` into an AI Agent / LLM node — or use **Content: Revise Email** to have Crystal rewrite an existing draft directly.
 - **As an AI Agent tool.** Attach this node to an AI Agent; the agent can look up a person and pull communication advice on its own.
 
-`Prediction: Create and Wait` blocks the workflow while it polls (default: every 3s, up to 120s). For large batches, prefer **Create** + a later **Get**, or raise the timeout.
+`Prediction: Create and Wait` blocks the workflow while it polls (default: every 5s, up to 300s). Jobs usually finish within a minute or two but can take longer when Crystal's queue is busy. For large batches, prefer **Create** + a later **Get** (e.g. via a Wait node), or raise the timeout.
 
 ## Resources
 
