@@ -1,0 +1,24 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    # Only devDependencies here (the build/lint/release toolchain) and the
+    # n8n-workflow peer. Keeping @n8n/node-cli current is how the residual
+    # transitive advisories in its tree get cleared as upstream patches land.
+    groups:
+      n8n-toolchain:
+        patterns:
+          - '@n8n/*'
+          - 'n8n-workflow'
+      dev-tooling:
+        patterns:
+          - 'eslint'
+          - 'prettier'
+          - 'release-it'
+          - 'typescript'
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
