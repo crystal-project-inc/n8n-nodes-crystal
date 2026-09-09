@@ -78,6 +78,12 @@ API credits are a single pool per organization. See the [API reference](https://
 
 `Prediction: Create and Wait` blocks the workflow while it polls (default: every 5s, up to 300s). Jobs usually finish within a minute or two but can take longer when Crystal's queue is busy. For large batches, prefer **Create** + a later **Get** (e.g. via a Wait node), or raise the timeout.
 
+## Security
+
+The published package has **no runtime dependencies** — `npm audit --omit=dev` reports 0 vulnerabilities. `n8n-workflow` is a peer dependency supplied by the n8n host.
+
+A full `npm audit` reports moderate advisories inside `@n8n/node-cli` (the build/lint/release toolchain, `devDependencies` only — never installed by users of this node). They cannot be resolved without downgrading `@n8n/node-cli` below the version n8n requires for verification, so they are tracked for upstream.
+
 ## Resources
 
 * [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
