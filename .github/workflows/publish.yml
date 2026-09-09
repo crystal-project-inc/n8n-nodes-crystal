@@ -1,0 +1,63 @@
+# Publishes @crystalknows/n8n-nodes-crystal to npm on every version tag push.
+#
+# n8n requires community nodes submitted for verification to be published via
+# GitHub Actions with npm provenance. This workflow satisfies that requirement:
+# provenance lets anyone cryptographically verify the package was built by this
+# exact workflow, from this exact repository and commit.
+#
+# ─── ONE-TIME SETUP ────────────────────────────────────────────────────────────
+#
+# OIDC Trusted Publishing (recommended — no long-lived secrets):
+#   1. npmjs.com → the package's Settings → "Publishing access".
+#   2. "Trusted Publisher" → "GitHub Actions", fill in:
+#        Organization or user: crystal-project-inc
+#        Repository:            n8n-nodes-crystal
+#        Workflow filename:     publish.yml
+#        Environment:           (leave blank)
+#   3. Leave NPM_TOKEN unset in this repo — GitHub's OIDC token is used instead.
+#
+# Fallback (npm automation token):
+#   npmjs.com → Access Tokens → Granular Access Token scoped to this package
+#   with read+write publish. Add it as the NPM_TOKEN Actions secret.
+#
+# ─── RELEASE PROCESS ───────────────────────────────────────────────────────────
+#
+# Run `npm run release` locally: it lints, builds, prompts for a version bump,
+# updates the changelog, commits, tags, and pushes — which triggers this workflow.
+
+name: Publish
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Release
+        run: |
+          [ -n "$NPM_TOKEN" ] && npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
+          npm run release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: 'true'

@@ -1,0 +1,18 @@
+{
+	"node": "@crystalknows/n8n-nodes-crystal.crystal",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Sales", "Marketing", "Data & Storage", "Developer Tools"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://github.com/crystal-project-inc/n8n-nodes-crystal?tab=readme-ov-file#credentials"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://github.com/crystal-project-inc/n8n-nodes-crystal?tab=readme-ov-file"
+			}
+		]
+	}
+}
