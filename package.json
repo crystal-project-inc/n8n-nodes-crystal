@@ -42,8 +42,7 @@
 		"!dist/tsconfig.tsbuildinfo"
 	],
 	"publishConfig": {
-		"access": "public",
-		"provenance": true
+		"access": "public"
 	},
 	"n8n": {
 		"n8nNodesApiVersion": 1,
