@@ -1,6 +1,6 @@
 {
 	"name": "@crystalknows/n8n-nodes-crystal",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "n8n community node for the Crystal Data API — enrich profiles and get DISC personality insights",
 	"license": "MIT",
 	"homepage": "https://github.com/crystal-project-inc/n8n-nodes-crystal#readme",
