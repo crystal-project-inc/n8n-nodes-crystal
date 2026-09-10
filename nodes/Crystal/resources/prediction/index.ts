@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import type { IExecuteSingleFunctions, IHttpRequestOptions, INodeProperties } from 'n8n-workflow';
 import { buildPredictionQuery, personQueryFields } from '../../shared/personQuery';
 import { pollPrediction } from '../../shared/pollPrediction';
@@ -11,11 +12,14 @@ async function attachPredictionBody(
 	this: IExecuteSingleFunctions,
 	requestOptions: IHttpRequestOptions,
 ): Promise<IHttpRequestOptions> {
-	const recordId = (this.getNodeParameter('recordId', '') as string).trim();
+	// Crystal requires record_id on every prediction. When the user hasn't set one,
+	// generate a unique key per execution (no idempotency across re-runs, which is
+	// the right default for a workflow step).
+	const recordId = (this.getNodeParameter('recordId', '') as string).trim() || randomUUID();
 
 	requestOptions.body = {
 		query: buildPredictionQuery(this),
-		...(recordId ? { record_id: recordId } : {}),
+		record_id: recordId,
 	};
 
 	return requestOptions;
@@ -78,7 +82,7 @@ export const predictionFields: INodeProperties[] = [
 		default: '',
 		displayOptions: { show: showForCreate },
 		description:
-			'Client-supplied idempotency key. Resubmitting the same record ID will not double-charge.',
+			'Optional idempotency key. Leave blank to generate a unique one per execution. Set it explicitly to make re-runs idempotent — Crystal will not double-charge for the same Record ID.',
 	},
 	{
 		displayName: 'Poll Interval (Seconds)',
