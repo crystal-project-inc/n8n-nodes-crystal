@@ -82,7 +82,7 @@ API credits are a single pool per organization. See the [API reference](https://
 
 The published package has **no runtime dependencies** — `npm audit --omit=dev` reports 0 vulnerabilities. `n8n-workflow` is a peer dependency supplied by the n8n host.
 
-A full `npm audit` reports moderate advisories inside `@n8n/node-cli` (the build/lint/release toolchain, `devDependencies` only — never installed by users of this node). They cannot be resolved without downgrading `@n8n/node-cli` below the version n8n requires for verification, so they are tracked for upstream.
+A full `npm audit` reports advisories inside `@n8n/node-cli` and `release-it` (the build/lint/release toolchain, `devDependencies` only — never installed by users of this node). They cannot be resolved without breaking the release tooling or downgrading `@n8n/node-cli` below the version n8n requires for verification (n8n community packages may not use an `overrides` field), so they are tracked for upstream.
 
 ## Resources
 
