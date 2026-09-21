@@ -2,7 +2,7 @@
 	"node": "@crystalknows/n8n-nodes-crystal.crystal",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
-	"categories": ["Sales", "Marketing", "Data & Storage", "Developer Tools"],
+	"categories": ["Sales", "Marketing & Content", "Data & Storage"],
 	"resources": {
 		"credentialDocumentation": [
 			{
